@@ -1,0 +1,19 @@
+# Logs
+logs
+*.log
+
+# Enviroment variables
+.env
+
+# Virtual enviroments
+.venv
+
+# OS-generated files
+.DS_Store
+.SynologyWorkingDirectory
+Thumbs.db
+__pycache__
+
+# VS Code settings
+.vscode
+

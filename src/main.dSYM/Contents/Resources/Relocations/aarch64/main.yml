@@ -1,0 +1,5 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     '/Users/matt/Documents/projects/development/learning_c/rpg_game/src/main'
+relocations:     []
+...
