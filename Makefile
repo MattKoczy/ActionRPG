@@ -17,11 +17,18 @@ ifeq ($(OS),Windows_NT)
     SDL2_INCLUDE = C:/msys64/mingw64/include/SDL2   # SDL2 include directory for Windows
     SDL2_LIB = C:/msys64/mingw64/lib                # SDL2 library directory for Windows
     LDFLAGS = -L$(SDL2_LIB) -lmingw32 -lSDL2main -lSDL2 -lSDL2_image
-    EXECUTABLE := $(EXECUTABLE)  # Set .exe extension for Windows
+    EXECUTABLE := $(EXECUTABLE).exe  # Set .exe extension for Windows
 else
-    SDL2_INCLUDE = /opt/homebrew/include/SDL2       # SDL2 include directory for macOS
-    SDL2_LIB = /opt/homebrew/lib                    # SDL2 library directory for macOS
-    LDFLAGS = -L$(SDL2_LIB) -lSDL2 -lSDL2_image -framework Cocoa  # Add Cocoa framework for macOS
+    UNAME_S := $(shell uname -s)
+    ifeq ($(UNAME_S),Darwin)
+        SDL2_INCLUDE = /opt/homebrew/include/SDL2       # SDL2 include directory for macOS
+        SDL2_LIB = /opt/homebrew/lib                    # SDL2 library directory for macOS
+        LDFLAGS = -L$(SDL2_LIB) -lSDL2 -lSDL2_image -framework Cocoa  # Add Cocoa framework for macOS
+    else
+        SDL2_INCLUDE = /usr/include/SDL2                # SDL2 include directory for Ubuntu
+        SDL2_LIB = /usr/lib/x86_64-linux-gnu            # SDL2 library directory for Ubuntu
+        LDFLAGS = -L$(SDL2_LIB) -lSDL2 -lSDL2_image
+    endif
 endif
 
 # Default target to build the executable
